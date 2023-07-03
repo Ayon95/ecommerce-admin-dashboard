@@ -5,8 +5,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
-import { useStoreModal } from "@/hooks/use-store-modal";
-import Modal from "@/components/ui/modal";
 import {
   Form,
   FormControl,
@@ -23,8 +21,7 @@ const formSchema = z.object({
   name: z.string().min(2, { message: "Must contain at least 2 characters" }),
 });
 
-export default function StoreModal() {
-  const storeModal = useStoreModal();
+export default function SetupPage() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -44,14 +41,14 @@ export default function StoreModal() {
       setLoading(false);
     }
   }
+
   return (
-    <Modal
-      title="Create Store"
-      description="Add a new store for your products"
-      isOpen={storeModal.isOpen}
-      onClose={storeModal.onClose}
-    >
-      <div className="space-y-4">
+    <div className="px-5 h-full flex items-center justify-center">
+      <div className="w-full max-w-lg">
+        <h1 className="text-4xl font-semibold">Create store</h1>
+        <p className="mt-1 mb-5">
+          Get started by creating a store for your products
+        </p>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
@@ -71,21 +68,12 @@ export default function StoreModal() {
                 </FormItem>
               )}
             />
-            <div className="mt-5 flex justify-end space-x-2">
-              <Button
-                variant="outline"
-                disabled={loading}
-                onClick={storeModal.onClose}
-              >
-                Cancel
-              </Button>
-              <Button type="submit" disabled={loading}>
-                Create
-              </Button>
-            </div>
+            <Button className="mt-6" type="submit" disabled={loading}>
+              Create
+            </Button>
           </form>
         </Form>
       </div>
-    </Modal>
+    </div>
   );
 }
