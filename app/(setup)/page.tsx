@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
+import { Store } from "@prisma/client";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Must contain at least 2 characters" }),
