@@ -40,7 +40,9 @@ export default function StoreModal() {
       const response = await axios.post<Store>("/api/stores", formData);
       window.location.assign(`/${response.data.id}`);
     } catch (error) {
-      toast.error("Something went wrong.");
+      if (axios.isAxiosError(error)) toast.error(error.response?.data);
+      else if (error instanceof Error) toast.error(error.message);
+      else toast.error("Something went wrong.");
     } finally {
       setLoading(false);
     }

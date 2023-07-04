@@ -12,11 +12,7 @@ export async function POST(request: Request) {
     }
 
     if (!body.name) {
-      return new NextResponse("Name is required", { status: 400 });
-    }
-
-    if (typeof body.name !== "string") {
-      return new NextResponse("Name must be a string", { status: 400 });
+      return new NextResponse("Store name is required", { status: 400 });
     }
 
     const store = await prismadb.store.create({
