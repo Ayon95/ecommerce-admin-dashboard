@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
-import { useStoreModal } from "@/hooks/use-store-modal";
 import Modal from "@/components/ui/modal";
 import {
   Form,
@@ -20,18 +19,23 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { Store } from "@prisma/client";
 
+interface StoreModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
 const formSchema = z.object({
   name: z.string().min(2, { message: "Must contain at least 2 characters" }),
 });
 
-export default function StoreModal() {
-  const storeModal = useStoreModal();
+export default function StoreModal({ isOpen, onClose }: StoreModalProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
     },
   });
+
   const [loading, setLoading] = useState(false);
 
   async function onSubmit(formData: z.infer<typeof formSchema>) {
@@ -51,8 +55,8 @@ export default function StoreModal() {
     <Modal
       title="Create Store"
       description="Add a new store for your products"
-      isOpen={storeModal.isOpen}
-      onClose={storeModal.onClose}
+      isOpen={isOpen}
+      onClose={onClose}
     >
       <div className="space-y-4">
         <Form {...form}>
@@ -79,7 +83,7 @@ export default function StoreModal() {
                 type="button"
                 variant="outline"
                 disabled={loading}
-                onClick={storeModal.onClose}
+                onClick={onClose}
               >
                 Cancel
               </Button>

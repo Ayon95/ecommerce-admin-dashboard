@@ -3,10 +3,13 @@
 
 "use client";
 
-import StoreModal from "@/components/modals/store-modal";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
-export default function ModalProvider() {
+export default function ModalProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -15,5 +18,5 @@ export default function ModalProvider() {
 
   if (!isMounted) return null;
 
-  return <StoreModal />;
+  return <>{children}</>;
 }
