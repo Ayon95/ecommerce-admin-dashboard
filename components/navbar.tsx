@@ -15,7 +15,7 @@ export default async function Navbar() {
   });
 
   return (
-    <header className="flex p-4 border-b items-center">
+    <header className="flex px-5 py-4 border-b items-center">
       <StoreSwitcher stores={stores} />
       <NavLinks className="ml-6" />
       <div className="ml-auto">

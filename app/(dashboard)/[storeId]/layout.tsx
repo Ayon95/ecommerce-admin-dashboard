@@ -29,7 +29,7 @@ export default async function DashboardLayout({
   return (
     <>
       <Navbar />
-      {children}
+      <main className="px-5 py-4">{children}</main>
     </>
   );
 }
