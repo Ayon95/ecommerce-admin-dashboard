@@ -2,7 +2,7 @@ import prismadb from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import React from "react";
-import SettingsForm from "./components/settings-form";
+import SettingsContent from "./components/settings-content";
 
 interface SettingsPageProps {
   params: { storeId: string };
@@ -23,9 +23,5 @@ export default async function SettingsPage({ params }: SettingsPageProps) {
   // If the id in the URL is not correct for some reason, then the user will be redirected to the home page
   if (!currentStore) redirect("/");
 
-  return (
-    <div>
-      <SettingsForm initialStoreData={currentStore} />
-    </div>
-  );
+  return <SettingsContent currentStore={currentStore} />;
 }
