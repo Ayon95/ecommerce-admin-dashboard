@@ -21,7 +21,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { useParams, useRouter } from "next/navigation";
-import ModalProvider from "@/providers/modal-provider";
+import SafeClientComponentProvider from "@/providers/safe-client-component-provider";
 import AlertModal from "@/components/modals/alert-modal";
 
 interface SettingsFormProps {
@@ -87,14 +87,14 @@ export default function SettingsForm({ initialStoreData }: SettingsFormProps) {
 
   return (
     <>
-      <ModalProvider>
+      <SafeClientComponentProvider>
         <AlertModal
           isOpen={alertIsOpen}
           loading={loading}
           onClose={onCloseAlert}
           onConfirm={onDelete}
         />
-      </ModalProvider>
+      </SafeClientComponentProvider>
       <div className="flex justify-between items-center">
         <Heading title="Settings" subtitle="Manage store settings" />
         <Button

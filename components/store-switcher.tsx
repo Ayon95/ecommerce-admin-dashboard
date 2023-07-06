@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/command";
 import { Button } from "@/components/ui/button";
 import StoreModal from "@/components/modals/store-modal";
-import ModalProvider from "@/providers/modal-provider";
+import SafeClientComponentProvider from "@/providers/safe-client-component-provider";
 import { Store } from "@prisma/client";
 import { cn } from "@/lib/utils";
 
@@ -63,9 +63,9 @@ export default function StoreSwitcher({
 
   return (
     <>
-      <ModalProvider>
+      <SafeClientComponentProvider>
         <StoreModal isOpen={modalIsOpen} onClose={onModalClose} />
-      </ModalProvider>
+      </SafeClientComponentProvider>
       <Popover open={isOpen} onOpenChange={setIsOpen}>
         <PopoverTrigger asChild>
           <Button

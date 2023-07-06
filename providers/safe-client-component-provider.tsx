@@ -1,11 +1,11 @@
-// This modal provider is required to prevent any hydration error when the modal is used in layout.tsx which is a server component
-// It ensures that the modal is rendered only in case of client-side rendering (after ModalProvider is rendered)
+// This provider ensures that no hydration error occurs when rendering a client component
+// The client component will only be rendered when it is safe to do so, i.e. when the provider has been mounted
 
 "use client";
 
 import React, { useState, useEffect } from "react";
 
-export default function ModalProvider({
+export default function SafeClientComponentProvider({
   children,
 }: {
   children: React.ReactNode;
