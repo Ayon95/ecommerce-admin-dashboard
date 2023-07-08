@@ -17,6 +17,12 @@ export default function NavLinks({
       label: "Settings",
       isActive: pathname === `/${params.storeId}/settings`,
     },
+
+    {
+      href: `/${params.storeId}/billboards`,
+      label: "Billboards",
+      isActive: pathname === `/${params.storeId}/billboards`,
+    },
   ];
   return (
     <nav {...props}>
