@@ -38,7 +38,7 @@ export default function ImageUpload({
               type="button"
             >
               <span className="sr-only">Remove image</span>
-              <Trash className="h-4 w-4" />
+              <Trash aria-hidden className="h-4 w-4" />
             </Button>
             <Image
               className="object-cover"
