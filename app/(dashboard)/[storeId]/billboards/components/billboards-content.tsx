@@ -1,20 +1,27 @@
 "use client";
 
 import React from "react";
+import { useParams } from "next/navigation";
 import { Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import Heading from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import LinkButton from "@/components/ui/link-button";
-import { useParams } from "next/navigation";
+import { DataTable } from "@/components/ui/data-table";
+import { BillboardColumn, columns } from "./columns";
 
-export default function BillboardsContent() {
+interface BIllboardsContentProps {
+  billboards: BillboardColumn[];
+}
+
+export default function BillboardsContent({
+  billboards,
+}: BIllboardsContentProps) {
   const params = useParams();
   return (
     <>
       <div className="flex justify-between items-center">
         <Heading
-          title="Billboards (0)"
+          title={`Billboards (${billboards.length})`}
           subtitle="Manage billboards for your store"
         />
         <LinkButton href={`/${params.storeId}/billboards/new`}>
@@ -23,6 +30,7 @@ export default function BillboardsContent() {
         </LinkButton>
       </div>
       <Separator className="my-5" />
+      <DataTable columns={columns} data={billboards} filterKey="label" />
     </>
   );
 }

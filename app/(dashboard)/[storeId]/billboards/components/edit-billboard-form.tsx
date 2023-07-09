@@ -23,8 +23,6 @@ import Heading from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import ImageUpload from "@/components/ui/image-upload";
 import SafeClientComponentProvider from "@/providers/safe-client-component-provider";
-import { Trash } from "lucide-react";
-import AlertModal from "@/components/modals/alert-modal";
 
 interface EditBillboardFormProps {
   initialBillboardData: Billboard;
@@ -40,7 +38,6 @@ type FormData = z.infer<typeof formSchema>;
 export default function EditBillboardForm({
   initialBillboardData,
 }: EditBillboardFormProps) {
-  const [alertIsOpen, setAlertIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const params = useParams();
   const router = useRouter();
@@ -48,14 +45,6 @@ export default function EditBillboardForm({
     resolver: zodResolver(formSchema),
     defaultValues: initialBillboardData,
   });
-
-  function onCloseAlert() {
-    setAlertIsOpen(false);
-  }
-
-  function onOpenAlert() {
-    setAlertIsOpen(true);
-  }
 
   async function onSubmit(formData: FormData) {
     try {
@@ -76,48 +65,9 @@ export default function EditBillboardForm({
     }
   }
 
-  async function onDelete() {
-    try {
-      setLoading(true);
-      await axios.delete<Billboard>(
-        `/api/${params.storeId}/billboards/${params.billboardId}`
-      );
-      router.refresh();
-      router.push("/");
-      toast.success("Billboard removed successfully!");
-    } catch (error) {
-      if (axios.isAxiosError(error)) toast.error(error.response?.data);
-      else if (error instanceof Error) toast.error(error.message);
-      else toast.error("Cannot remove billboard since it has associated items");
-    } finally {
-      setLoading(false);
-      onCloseAlert();
-    }
-  }
-
   return (
     <>
-      <SafeClientComponentProvider>
-        <AlertModal
-          isOpen={alertIsOpen}
-          loading={loading}
-          onClose={onCloseAlert}
-          onConfirm={onDelete}
-        />
-      </SafeClientComponentProvider>
-      <div className="flex items-center justify-between">
-        <Heading title="Edit Billboard" subtitle="Change billboard details" />
-        <Button
-          variant="destructive"
-          size="sm"
-          disabled={loading}
-          className="px-3 py-5"
-          onClick={onOpenAlert}
-        >
-          <span className="sr-only">Remove billboard</span>
-          <Trash aria-hidden className="h-5 w-5" />
-        </Button>
-      </div>
+      <Heading title="Edit Billboard" subtitle="Change billboard details" />
       <Separator className="my-4" />
       <Form {...form}>
         <form className="space-y-5" onSubmit={form.handleSubmit(onSubmit)}>
