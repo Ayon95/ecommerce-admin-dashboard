@@ -63,7 +63,7 @@ export default function CreateBillboardForm() {
   }
   return (
     <>
-      <Heading title="Create Billboard" subtitle="Add a new billboard" />
+      <Heading title="Create Billboard" subtitle="Add a new billboard" level="h1" />
       <Separator className="my-4" />
       <Form {...form}>
         <form className="space-y-5" onSubmit={form.handleSubmit(onSubmit)}>

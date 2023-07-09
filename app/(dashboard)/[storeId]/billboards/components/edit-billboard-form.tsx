@@ -67,7 +67,7 @@ export default function EditBillboardForm({
 
   return (
     <>
-      <Heading title="Edit Billboard" subtitle="Change billboard details" />
+      <Heading title="Edit Billboard" subtitle="Change billboard details" level="h1" />
       <Separator className="my-4" />
       <Form {...form}>
         <form className="space-y-5" onSubmit={form.handleSubmit(onSubmit)}>

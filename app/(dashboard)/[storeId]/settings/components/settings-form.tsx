@@ -96,7 +96,7 @@ export default function SettingsForm({ initialStoreData }: SettingsFormProps) {
         />
       </SafeClientComponentProvider>
       <div className="flex justify-between items-center">
-        <Heading title="Settings" subtitle="Manage store settings" />
+        <Heading title="Settings" subtitle="Manage store settings" level="h1" />
         <Button
           variant="destructive"
           size="sm"
