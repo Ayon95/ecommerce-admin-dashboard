@@ -29,6 +29,12 @@ export default function NavLinks({
       label: "Categories",
       isActive: pathname === `/${params.storeId}/categories`,
     },
+
+    {
+      href: `/${params.storeId}/sizes`,
+      label: "Sizes",
+      isActive: pathname === `/${params.storeId}/sizes`,
+    },
   ];
   return (
     <nav {...props}>
