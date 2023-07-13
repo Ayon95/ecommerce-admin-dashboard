@@ -6,7 +6,7 @@ import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import { toast } from "react-hot-toast";
-import { Size } from "@prisma/client";
+import { Color } from "@prisma/client";
 import SafeClientComponentProvider from "@/providers/safe-client-component-provider";
 import {
   DropdownMenu,
@@ -17,13 +17,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import AlertModal from "@/components/modals/alert-modal";
-import { SizeColumn } from "./columns";
+import { ColorColumn } from "./columns";
 
 interface CellActionProps {
-  size: SizeColumn;
+  color: ColorColumn;
 }
 
-export default function CellAction({ size }: CellActionProps) {
+export default function CellAction({ color }: CellActionProps) {
   const [alertIsOpen, setAlertIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -32,7 +32,7 @@ export default function CellAction({ size }: CellActionProps) {
 
   function onCopyID(id: string) {
     navigator.clipboard.writeText(id);
-    toast.success("Size ID copied to clipboard.");
+    toast.success("Color ID copied to clipboard.");
   }
 
   function onOpenAlert() {
@@ -46,13 +46,13 @@ export default function CellAction({ size }: CellActionProps) {
   async function onDelete() {
     try {
       setLoading(true);
-      await axios.delete<Size>(`/api/${params.storeId}/sizes/${size.id}`);
+      await axios.delete<Color>(`/api/${params.storeId}/colors/${color.id}`);
       router.refresh();
-      toast.success("Size removed successfully!");
+      toast.success("Color removed successfully!");
     } catch (error) {
       if (axios.isAxiosError(error)) toast.error(error.response?.data);
       else if (error instanceof Error) toast.error(error.message);
-      else toast.error("Cannot remove size since it has associated products");
+      else toast.error("Cannot remove color since it has associated products");
     } finally {
       setLoading(false);
       onCloseAlert();
@@ -80,14 +80,14 @@ export default function CellAction({ size }: CellActionProps) {
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem
             className="cursor-pointer"
-            onClick={() => onCopyID(size.id)}
+            onClick={() => onCopyID(color.id)}
           >
             <Copy className="mr-2 h-4 w-4" />
             Copy ID
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Link
-              href={`/${params.storeId}/sizes/${size.id}/edit`}
+              href={`/${params.storeId}/colors/${color.id}/edit`}
               className="flex"
             >
               <Edit className="mr-2 h-4 w-4" />
