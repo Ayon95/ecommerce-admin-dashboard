@@ -10,7 +10,7 @@ interface ImageUploadProps {
   imageUrls: string[];
   isDisabled?: boolean;
   onChange: (imageUrl: string) => void;
-  onRemove: () => void;
+  onRemove: (imageUrl?: string) => void;
 }
 
 export default function ImageUpload({
@@ -34,7 +34,7 @@ export default function ImageUpload({
               className="absolute top-2 right-2 z-10"
               variant="destructive"
               size="icon"
-              onClick={() => onRemove()}
+              onClick={() => onRemove(url)}
               type="button"
             >
               <span className="sr-only">Remove image</span>
@@ -43,7 +43,7 @@ export default function ImageUpload({
             <Image
               className="object-cover"
               src={url}
-              alt="Preview of billboard image"
+              alt="Preview of image"
               fill
             />
           </div>

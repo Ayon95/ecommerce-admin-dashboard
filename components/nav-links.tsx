@@ -13,12 +13,6 @@ export default function NavLinks({
   const pathname = usePathname();
   const routes = [
     {
-      href: `/${params.storeId}/settings`,
-      label: "Settings",
-      isActive: pathname === `/${params.storeId}/settings`,
-    },
-
-    {
       href: `/${params.storeId}/billboards`,
       label: "Billboards",
       isActive: pathname === `/${params.storeId}/billboards`,
@@ -40,6 +34,18 @@ export default function NavLinks({
       href: `/${params.storeId}/colors`,
       label: "Colors",
       isActive: pathname === `/${params.storeId}/colors`,
+    },
+
+    {
+      href: `/${params.storeId}/products`,
+      label: "Products",
+      isActive: pathname === `/${params.storeId}/products`,
+    },
+
+    {
+      href: `/${params.storeId}/settings`,
+      label: "Settings",
+      isActive: pathname === `/${params.storeId}/settings`,
     },
   ];
   return (

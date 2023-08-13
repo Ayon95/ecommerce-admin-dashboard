@@ -2,6 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import CellAction from "./cell-action";
+import ColorDisplay from "@/components/color-display";
 
 export type ColorColumn = {
   id: string;
@@ -20,15 +21,7 @@ export const columns: ColumnDef<ColorColumn>[] = [
   {
     accessorKey: "value",
     header: "Value",
-    cell: ({ row }) => (
-      <div className="flex items-center space-x-2">
-        <span
-          className="h-5 w-5 rounded border border-slate-700 dark:border-slate-50"
-          style={{ backgroundColor: row.original.value }}
-        ></span>
-        <span>{row.original.value}</span>
-      </div>
-    ),
+    cell: ({ row }) => <ColorDisplay color={row.original.value} />,
   },
 
   {
